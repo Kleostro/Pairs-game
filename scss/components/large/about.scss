@@ -1,0 +1,143 @@
+.about {
+  padding-top: var(--small-offset);
+  padding-bottom: 10px;
+  background-color: var(--color-white);
+
+  &__container {
+    flex-direction: column;
+    align-items: center;
+  }
+
+  &__title {
+    margin-bottom: var(--main-offset);
+  }
+
+  &__descr {
+    margin-bottom: var(--small-offset);
+    font: var(--inter-regular-second);
+    color: #000;
+  }
+
+  &__swiper {
+    position: relative;
+    max-width: 1400px;
+    width: 100%;
+    min-height: 560px;
+    height: 100%;
+    padding-bottom: 108px;
+  }
+
+  &__slide {
+    max-width: 450px;
+    min-height: 560px;
+    height: 100%;
+
+    &-1 {
+      background-image: url(img/about-1.jpg);
+      background-repeat: no-repeat;
+      background-position: center center;
+      background-size: cover;
+    }
+    &-2 {
+      background-image: url(img/about-2.jpg);
+      background-repeat: no-repeat;
+      background-position: center center;
+      background-size: cover;
+    }
+    &-3 {
+      background-image: url(img/about-3.jpg);
+      background-repeat: no-repeat;
+      background-position: center center;
+      background-size: cover;
+    }
+    &-4 {
+      background-image: url(img/about-4.jpg);
+      background-repeat: no-repeat;
+      background-position: center center;
+      background-size: cover;
+    }
+    &-5 {
+      background-image: url(img/about-5.jpg);
+      background-repeat: no-repeat;
+      background-position: center center;
+      background-size: cover;
+    }
+  }
+
+  &__pagination {
+    position: absolute;
+    justify-content: center;
+    z-index: 1;
+    padding-bottom: var(--main-offset);
+
+    &-bullet {
+      position: relative;
+      width: 26px;
+      height: 26px;
+      outline: none;
+      cursor: pointer;
+      opacity: 1;
+      transition: opacity 0.3s ease-in-out;
+
+      &::before {
+        content:"";
+        position: absolute;
+        left: 50%;
+        bottom: 0;
+        top: 50%;
+        right: 0;
+        width: 16px;
+        height: 16px;
+        transform: translate(-50%, -50%);
+        background-color: var(--color-black);
+        border-radius: 100%;
+        transition: background-color 0.3s ease-in-out;
+      }
+
+      &:focus-visible {
+        opacity: 0.5;
+      }
+
+      @include desctop {
+        &:hover {
+
+          &::before {
+            background-color: var(--color-gray);
+          }
+        }
+      }
+
+      &:active {
+        &::before {
+          background-color: var(--color-tussock);
+        }
+      }
+
+      &--active {
+        position: relative;
+
+        &::before {
+          position: absolute;
+          left: 50%;
+          bottom: 0;
+          top: 50%;
+          right: 0;
+          width: 16px;
+          height: 16px;
+          transform: translate(-50%, -50%);
+          background-color: var(--color-tussock);
+          border-radius: 100%;
+        }
+
+        @include desctop {
+          &:hover {
+            &::before {
+              background-color: var(--color-tussock);
+            }
+          }
+        }
+      }
+    }
+  }
+}
+
