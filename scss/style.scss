@@ -1,0 +1,25 @@
+// базовые стили
+@import 'fonts.scss';
+@import 'normalize.scss';
+@import 'reset.scss';
+
+// миксины
+@import 'components/mixins/breakpoint.scss';
+
+@import 'common.scss';
+@import 'global.scss';
+// большие куски стилей
+@import 'components/large/header.scss';
+@import 'components/large/hero.scss';
+@import 'components/large/about.scss';
+@import 'components/large/favorites.scss';
+@import 'components/large/shop.scss';
+@import 'components/large/contacts.scss';
+@import 'components/large/card.scss';
+@import 'components/large/footer.scss';
+
+// малые куски стилей
+@import 'components/small/favorites-book.scss';
+@import 'components/small/catalog.scss';
+
+
