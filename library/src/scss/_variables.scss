@@ -1,0 +1,42 @@
+:root {
+  // цвета
+
+  --color-black: #0C0C0E;
+  --color-white: #fff;
+  --color-gray: #666666;
+  --color-gray-light: #8e8e8e;
+  --color-tussock: #BB945F;
+  --color-bg: #666669;
+
+  // отступы
+  --small-offset: 20px;
+  --second-offset: 30px;
+  --main-offset: 40px;
+  --big-offset: 60px;
+
+  // шрифты
+  --Inter-family: "Inter", sans-serif;
+  --Forum-family: "Forum", sans-serif;
+
+  --inter-regular-small-mini: 400 15px / 20px var(--Inter-family);
+  --inter-regular-small: 400 15px / 40px var(--Inter-family);
+  --inter-regular-small-normal: 400 30px / normal var(--Inter-family);
+  --inter-regular-second-mini: 400 20px / 20px var(--Inter-family);
+  --inter-regular-second-normal: 400 20px / normal var(--Inter-family);
+  --inter-regular-second: 400 20px / 40px var(--Inter-family);
+  --inter-regular-main: 400 20px / 50px var(--Inter-family);
+  --inter-bold-small-normal: 700 10px / normal var(--Inter-family);
+  --inter-bold-small: 700 15px / 40px var(--Inter-family);
+  --inter-bold-second-normal: 700 20px / normal var(--Inter-family);
+  --inter-bold-second: 700 20px / 40px var(--Inter-family);
+  --forum-regular-small: 400 20px / 40px var(--Forum-family);
+  --forum-regular-second: 400 30px / 50px var(--Forum-family);
+  --forum-regular-second-normal: 400 30px / normal var(--Forum-family);
+  --forum-regular-main: 400 40px / 40px var(--Forum-family);
+  --forum-regular-big: 400 40px / 50px var(--Forum-family);
+}
+
+
+
+
+
