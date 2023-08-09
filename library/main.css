@@ -363,9 +363,6 @@ h1, h2, h3, h4, h5, h6, p {
 
 @media (max-width: 1024px) {
   .nav__list {
-    position: absolute;
-    right: 0;
-    top: 112%;
     margin-top: -1px;
     -webkit-box-orient: vertical;
     -webkit-box-direction: normal;
@@ -383,8 +380,8 @@ h1, h2, h3, h4, h5, h6, p {
   .nav__list-link {
     opacity: 0;
     visibility: hidden;
-    -webkit-transition: 0.3s ease-in-out 0.3s;
-    transition: 0.3s ease-in-out 0.3s;
+    -webkit-transition: 1s ease-in-out 0.5s;
+    transition: 1s ease-in-out 0.5s;
   }
 }
 @media (max-width: 1024px) {
@@ -397,10 +394,10 @@ h1, h2, h3, h4, h5, h6, p {
     -webkit-transform: translateX(0);
     -ms-transform: translateX(0);
     transform: translateX(0);
-    -webkit-transition: 0.8s ease-in-out;
-    transition: 0.8s ease-in-out;
-    -webkit-animation: burger-closed 0.8s ease-in-out;
-    animation: burger-closed 0.8s ease-in-out;
+    -webkit-transition: 1s ease-in-out;
+    transition: 1s ease-in-out;
+    -webkit-animation: burger-closed 1s ease-in-out;
+    animation: burger-closed 1s ease-in-out;
   }
 }
 @-webkit-keyframes burger-closed {
@@ -439,16 +436,16 @@ h1, h2, h3, h4, h5, h6, p {
     -webkit-transform: translateX(0);
     -ms-transform: translateX(0);
     transform: translateX(0);
-    -webkit-transition: 0.8s;
-    transition: 0.8s;
-    -webkit-animation: burger 0.8s ease-in-out;
-    animation: burger 0.8s ease-in-out;
+    -webkit-transition: 1s;
+    transition: 1s;
+    -webkit-animation: burger 1s ease-in-out;
+    animation: burger 1s ease-in-out;
   }
   .nav--active .nav__list-link {
     opacity: 1;
     visibility: visible;
-    -webkit-transition: 0.3s ease-in-out 0.3s;
-    transition: 0.3s ease-in-out 0.3s;
+    -webkit-transition: 0.5s ease-in-out 0.5s;
+    transition: 0.5s ease-in-out 0.5s;
   }
 }
 @-webkit-keyframes burger {
@@ -624,7 +621,6 @@ img {
 
 .nav__list {
   padding-top: 12px;
-  padding-left: 12px;
 }
 .nav__list-item:not(:last-child) {
   margin-right: var(--second-offset);
@@ -726,7 +722,7 @@ img {
   display: none;
   margin-left: 40px;
   --burger-width: 45px;
-  --burger-height: 20px;
+  --burger-height: 45px;
   --burger-line-height: 2px;
   color: var(--color-white);
 }
@@ -737,60 +733,66 @@ img {
   width: 100%;
   height: var(--burger-line-height);
   background-color: currentColor;
-  -webkit-transition: top 0.3s ease-in-out, -webkit-transform 0.3s ease-in-out;
-  transition: top 0.3s ease-in-out, -webkit-transform 0.3s ease-in-out;
-  transition: transform 0.3s ease-in-out, top 0.3s ease-in-out;
-  transition: transform 0.3s ease-in-out, top 0.3s ease-in-out, -webkit-transform 0.3s ease-in-out;
+  -webkit-transition: top 0.5s ease-in-out, background-color 1s ease-in-out, -webkit-transform 0.5s ease-in-out;
+  transition: top 0.5s ease-in-out, background-color 1s ease-in-out, -webkit-transform 0.5s ease-in-out;
+  transition: transform 0.5s ease-in-out, top 0.5s ease-in-out, background-color 1s ease-in-out;
+  transition: transform 0.5s ease-in-out, top 0.5s ease-in-out, background-color 1s ease-in-out, -webkit-transform 0.5s ease-in-out;
+}
+.burger:active::before, .burger:active::after, .burger:active .burger__line {
+  background-color: var(--color-tussock);
 }
 .burger::before {
-  top: -2px;
+  top: 10px;
 }
 .burger::after {
-  top: calc(100% - var(--burger-line-height));
+  bottom: 13px;
 }
 .burger__line {
   position: absolute;
   left: 0;
-  top: 50%;
+  top: 48%;
   width: 100%;
   height: var(--burger-line-height);
   background-color: currentColor;
   -webkit-transform: translateY(-50%);
   -ms-transform: translateY(-50%);
   transform: translateY(-50%);
-  -webkit-transition: -webkit-transform 0.3s ease-in-out;
-  transition: -webkit-transform 0.3s ease-in-out;
-  transition: transform 0.3s ease-in-out;
-  transition: transform 0.3s ease-in-out, -webkit-transform 0.3s ease-in-out;
+  -webkit-transition: background-color 1s ease-in-out, -webkit-transform 0.5s ease-in-out;
+  transition: background-color 1s ease-in-out, -webkit-transform 0.5s ease-in-out;
+  transition: transform 0.5s ease-in-out, background-color 1s ease-in-out;
+  transition: transform 0.5s ease-in-out, background-color 1s ease-in-out, -webkit-transform 0.5s ease-in-out;
 }
 .burger--active::before {
   top: 50%;
   -webkit-transform: rotate(45deg);
   -ms-transform: rotate(45deg);
   transform: rotate(45deg);
-  -webkit-transition: top 0.3s ease-in-out, -webkit-transform 0.3s ease-in-out;
-  transition: top 0.3s ease-in-out, -webkit-transform 0.3s ease-in-out;
-  transition: transform 0.3s ease-in-out, top 0.3s ease-in-out;
-  transition: transform 0.3s ease-in-out, top 0.3s ease-in-out, -webkit-transform 0.3s ease-in-out;
+  -webkit-transition: top 0.5s ease-in-out, -webkit-transform 0.5s ease-in-out;
+  transition: top 0.5s ease-in-out, -webkit-transform 0.5s ease-in-out;
+  transition: transform 0.5s ease-in-out, top 0.5s ease-in-out;
+  transition: transform 0.5s ease-in-out, top 0.5s ease-in-out, -webkit-transform 0.5s ease-in-out;
 }
 .burger--active::after {
   top: 50%;
   -webkit-transform: rotate(-45deg);
   -ms-transform: rotate(-45deg);
   transform: rotate(-45deg);
-  -webkit-transition: top 0.3s ease-in-out, -webkit-transform 0.3s ease-in-out;
-  transition: top 0.3s ease-in-out, -webkit-transform 0.3s ease-in-out;
-  transition: transform 0.3s ease-in-out, top 0.3s ease-in-out;
-  transition: transform 0.3s ease-in-out, top 0.3s ease-in-out, -webkit-transform 0.3s ease-in-out;
+  -webkit-transition: top 0.5s ease-in-out, -webkit-transform 0.5s ease-in-out;
+  transition: top 0.5s ease-in-out, -webkit-transform 0.5s ease-in-out;
+  transition: transform 0.5s ease-in-out, top 0.5s ease-in-out;
+  transition: transform 0.5s ease-in-out, top 0.5s ease-in-out, -webkit-transform 0.5s ease-in-out;
 }
 .burger--active .burger__line {
   -webkit-transform: scale(0);
   -ms-transform: scale(0);
   transform: scale(0);
-  -webkit-transition: -webkit-transform 0.3s ease-in-out;
-  transition: -webkit-transform 0.3s ease-in-out;
-  transition: transform 0.3s ease-in-out;
-  transition: transform 0.3s ease-in-out, -webkit-transform 0.3s ease-in-out;
+  -webkit-transition: -webkit-transform 0.5s ease-in-out;
+  transition: -webkit-transform 0.5s ease-in-out;
+  transition: transform 0.5s ease-in-out;
+  transition: transform 0.5s ease-in-out, -webkit-transform 0.5s ease-in-out;
+}
+.burger--active {
+  padding: 22px;
 }
 @media (max-width: 1024px) {
   .burger {
