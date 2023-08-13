@@ -609,10 +609,10 @@ img {
   background-color: var(--color-black);
 }
 .header__container {
-  padding-top: 22px;
   -webkit-box-align: center;
   -ms-flex-align: center;
   align-items: center;
+  height: 90px;
 }
 .header__title {
   font: var(--forum-regular-second);
