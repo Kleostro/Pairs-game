@@ -386,14 +386,14 @@ h1, h2, h3, h4, h5, h6, p {
 }
 @media (max-width: 1024px) {
   .nav {
-    position: absolute;
+    position: fixed;
     opacity: 0;
     visibility: hidden;
-    right: 0;
-    top: 100%;
-    -webkit-transform: translateX(0);
-    -ms-transform: translateX(0);
-    transform: translateX(0);
+    right: -500px;
+    top: 91px;
+    -webkit-transform: translateX(400px);
+    -ms-transform: translateX(400px);
+    transform: translateX(400px);
     -webkit-transition: 1s ease-in-out;
     transition: 1s ease-in-out;
     -webkit-animation: burger-closed 1s ease-in-out;
@@ -430,9 +430,11 @@ h1, h2, h3, h4, h5, h6, p {
 }
 @media (max-width: 1024px) {
   .nav--active {
-    position: absolute;
+    position: fixed;
     opacity: 1;
     visibility: visible;
+    top: 91px;
+    right: 0;
     -webkit-transform: translateX(0);
     -ms-transform: translateX(0);
     transform: translateX(0);
@@ -600,7 +602,7 @@ img {
 }
 
 .header {
-  position: fixed;
+  position: relative;
   z-index: 1000;
   width: 100%;
   min-height: 90px;
@@ -801,7 +803,6 @@ img {
 }
 
 .hero {
-  padding-top: 90px;
   margin-top: -1px;
   background: -webkit-gradient(linear, left top, left bottom, from(#0C0C0E), color-stop(0.01%, #0C0C0E), to(rgba(18, 18, 21, 0.1))), url(img/hero.jpg);
   background: linear-gradient(180deg, #0C0C0E 0%, #0C0C0E 0.01%, rgba(18, 18, 21, 0.1) 100%), url(img/hero.jpg);
