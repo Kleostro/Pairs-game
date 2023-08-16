@@ -487,6 +487,109 @@ h1, h2, h3, h4, h5, h6, p {
   }
 }
 
+.modal {
+  position: absolute;
+  opacity: 0;
+  visibility: hidden;
+  -webkit-transition: opacity 0.5s ease-in-out, visibility 0.5s ease-in-out;
+  transition: opacity 0.5s ease-in-out, visibility 0.5s ease-in-out;
+}
+.modal--active {
+  position: relative;
+  opacity: 1;
+  visibility: visible;
+}
+.modal__overlay {
+  position: fixed;
+  left: 0;
+  right: 0;
+  top: 0;
+  bottom: 0;
+  background-color: rgba(0, 0, 0, 0.5);
+  opacity: 0;
+  visibility: hidden;
+  z-index: 2;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+  -webkit-box-pack: center;
+  -ms-flex-pack: center;
+  justify-content: center;
+  height: 100vh;
+  width: 100%;
+  -webkit-transition: opacity 0.5s ease-in-out, visibility 0.5s ease-in-out;
+  transition: opacity 0.5s ease-in-out, visibility 0.5s ease-in-out;
+}
+.modal__overlay--active {
+  opacity: 1;
+  visibility: visible;
+}
+.modal__content {
+  background-color: var(--color-white);
+  width: -webkit-max-content;
+  width: -moz-max-content;
+  width: max-content;
+  height: auto;
+  opacity: 0;
+  visibility: hidden;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+  -ms-flex-direction: column;
+  flex-direction: column;
+  position: relative;
+  border-radius: 0;
+  -webkit-transform: translateY(-150px);
+  -ms-transform: translateY(-150px);
+  transform: translateY(-150px);
+  -webkit-transition: opacity 0.5s ease-in-out, visibility 0.5s ease-in-out, -webkit-transform 0.5s ease-in-out;
+  transition: opacity 0.5s ease-in-out, visibility 0.5s ease-in-out, -webkit-transform 0.5s ease-in-out;
+  transition: opacity 0.5s ease-in-out, visibility 0.5s ease-in-out, transform 0.5s ease-in-out;
+  transition: opacity 0.5s ease-in-out, visibility 0.5s ease-in-out, transform 0.5s ease-in-out, -webkit-transform 0.5s ease-in-out;
+}
+.modal__content--active {
+  opacity: 1;
+  visibility: visible;
+  -webkit-transform: none;
+  -ms-transform: none;
+  transform: none;
+}
+.modal__btn {
+  position: absolute;
+  right: 15px;
+  top: 15px;
+  width: 15px;
+  height: 15px;
+}
+.modal__btn svg {
+  width: 100%;
+  height: 100%;
+  -o-object-fit: cover;
+  object-fit: cover;
+  stroke: var(--color-black);
+  -webkit-transition: stroke 0.3s ease-in-out, opacity 0.3s ease-in-out;
+  transition: stroke 0.3s ease-in-out, opacity 0.3s ease-in-out;
+}
+.modal__btn:focus-visible svg {
+  stroke: var(--color-tussock);
+  opacity: 0.5;
+}
+@media (min-width: 1025px) {
+  .modal__btn:hover svg {
+    stroke: var(--color-tussock);
+    opacity: 0.5;
+  }
+}
+.modal__btn:active svg {
+  stroke: var(--color-tussock);
+  opacity: 1;
+}
+
 :root {
   --color-black: #0C0C0E;
   --color-white: #fff;
@@ -611,7 +714,6 @@ img {
 
 .header {
   position: relative;
-  z-index: 1000;
   width: 100%;
   min-height: 90px;
   background-color: var(--color-black);
@@ -711,6 +813,7 @@ img {
   height: 100%;
   -o-object-fit: cover;
   object-fit: cover;
+  pointer-events: none;
   fill: var(--color-white);
   -webkit-transition: fill 0.3s ease-in-out;
   transition: fill 0.3s ease-in-out;
@@ -725,6 +828,12 @@ img {
 }
 .account__btn:active {
   opacity: 0.5;
+}
+.account__btn-after-register {
+  font: var(--inter-regular-small-mini);
+  color: var(--color-tussock);
+  background-color: var(--color-white);
+  border-radius: 20px;
 }
 .account__list {
   position: absolute;
@@ -770,6 +879,22 @@ img {
   width: 100%;
   font: var(--inter-regular-small-mini);
   text-align: center;
+  -webkit-transition: color 0.3s ease-in-out, opacity 0.3s ease-in-out;
+  transition: color 0.3s ease-in-out, opacity 0.3s ease-in-out;
+}
+.account__list-button:focus-visible {
+  color: var(--color-tussock);
+  opacity: 0.5;
+}
+@media (min-width: 1025px) {
+  .account__list-button:hover {
+    color: var(--color-tussock);
+    opacity: 0.5;
+  }
+}
+.account__list-button:active {
+  color: var(--color-tussock);
+  opacity: 1;
 }
 .account__list--active {
   -webkit-transform: none;
@@ -2233,4 +2358,178 @@ img {
 }
 .catalog__right-title {
   margin-left: auto;
+}
+
+.register-modal__title {
+  font: var(--forum-regular-small);
+  line-height: 20px;
+  letter-spacing: 0.4px;
+  text-transform: uppercase;
+  margin-bottom: 20px;
+}
+.register-modal__form {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+  -ms-flex-direction: column;
+  flex-direction: column;
+  gap: 10px;
+}
+.register-modal__label {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+  -ms-flex-direction: column;
+  flex-direction: column;
+  cursor: pointer;
+  -webkit-transition: color 0.3s ease-in-out;
+  transition: color 0.3s ease-in-out;
+}
+.register-modal__label:focus-within {
+  color: var(--color-tussock);
+}
+.register-modal__label:focus-within .register-modal__name::after {
+  -webkit-transform: scaleX(1);
+  -ms-transform: scaleX(1);
+  transform: scaleX(1);
+}
+@media (min-width: 1025px) {
+  .register-modal__label:hover {
+    color: var(--color-tussock);
+  }
+  .register-modal__label:hover .register-modal__name::after {
+    -webkit-transform: scaleX(1);
+    -ms-transform: scaleX(1);
+    transform: scaleX(1);
+  }
+}
+.register-modal__input {
+  border: none;
+  outline: 1px solid var(--color-tussock);
+  color: var(--color-gray);
+  -webkit-transition: outline 0.3s ease-in-out, outline-offset 0.2s ease-in-out;
+  transition: outline 0.3s ease-in-out, outline-offset 0.2s ease-in-out;
+}
+.register-modal__input:focus-within {
+  outline: 2px solid var(--color-gray-light);
+  outline-offset: 2px;
+}
+.register-modal__name {
+  position: relative;
+  display: block;
+  margin-bottom: 10px;
+  font: var(--inter-regular-small-mini);
+  letter-spacing: 0.3px;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+  max-width: -webkit-max-content;
+  max-width: -moz-max-content;
+  max-width: max-content;
+}
+.register-modal__name::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  bottom: 0;
+  width: 100%;
+  height: 1px;
+  -webkit-transform: scaleX(0);
+  -ms-transform: scaleX(0);
+  transform: scaleX(0);
+  background-color: var(--color-tussock);
+  -webkit-transition: -webkit-transform 0.3s ease-in-out;
+  transition: -webkit-transform 0.3s ease-in-out;
+  transition: transform 0.3s ease-in-out;
+  transition: transform 0.3s ease-in-out, -webkit-transform 0.3s ease-in-out;
+}
+.register-modal__btn {
+  margin: 10px 0;
+  outline: 1px solid var(--color-black);
+  border-radius: 2px;
+  padding: 9px 16px;
+  max-width: -webkit-max-content;
+  max-width: -moz-max-content;
+  max-width: max-content;
+  font: var(--inter-bold-small-normal);
+  letter-spacing: 1px;
+  color: var(--color-black);
+  background-color: transparent;
+  -webkit-transition: background-color 0.3s ease-in-out, opacity 0.3s ease-in-out, outline 0.3s ease-in-out;
+  transition: background-color 0.3s ease-in-out, opacity 0.3s ease-in-out, outline 0.3s ease-in-out;
+}
+.register-modal__btn:focus-visible {
+  outline: 1px solid transparent;
+  background-color: var(--color-tussock);
+}
+@media (min-width: 1025px) {
+  .register-modal__btn:hover {
+    outline: 1px solid transparent;
+    background-color: var(--color-tussock);
+  }
+}
+.register-modal__btn:active {
+  outline: 1px solid transparent;
+  opacity: 0.8;
+}
+.register-modal__descr {
+  font: var(--inter-regular-small-normal);
+  font-size: 10px;
+  text-shadow: 0px 2px 3px rgba(255, 255, 255, 0.16);
+  max-width: -webkit-max-content;
+  max-width: -moz-max-content;
+  max-width: max-content;
+}
+.register-modal__btn-login {
+  font: var(--inter-bold-small-normal);
+  letter-spacing: 1px;
+  text-decoration-line: underline;
+  color: var(--color-black);
+  max-width: -webkit-max-content;
+  max-width: -moz-max-content;
+  max-width: max-content;
+  padding-left: 10px;
+  -webkit-transition: opacity 0.3s ease-in-out, color 0.3s ease-in-out;
+  transition: opacity 0.3s ease-in-out, color 0.3s ease-in-out;
+}
+.register-modal__btn-login:focus-visible {
+  color: var(--color-tussock);
+  opacity: 0.7;
+}
+@media (min-width: 1025px) {
+  .register-modal__btn-login:hover {
+    color: var(--color-tussock);
+    opacity: 0.7;
+  }
+}
+.register-modal__btn-login:active {
+  color: var(--color-tussock);
+  opacity: 1;
+}
+
+.register-content {
+  max-width: 250px;
+  width: 100%;
+  min-height: 382px;
+  padding: 20px 25px;
+}
+
+.error {
+  outline: 1px solid red;
+}
+
+.error-text {
+  padding-top: 10px;
+  font: var(--inter-regular-small-normal);
+  font-size: 10px;
+  color: red;
+}
+
+.complete {
+  outline: 1px solid green;
 }
