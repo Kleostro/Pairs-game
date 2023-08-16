@@ -25,16 +25,8 @@
       </ul>
     </nav>
     <div class="account">
-      <button class="btn-reset account__btn">
-        <svg>
-          <use xlink:href="img/sprite.svg#account"></use>
-        </svg>
-      </button>
-      <ul class="account__list list-reset">
-        <strong class="account__list-text">Profile</strong>
-        <li class="account__list-item"><button class="account__list-button btn-reset">Log In</button></li>
-        <li class="account__list-item"><button class="account__list-button btn-reset">Register</button></li>
-      </ul>
+      <button class="btn-reset account__btn"></button>
+      <ul class="account__list list-reset"></ul>
     </div>
     <button class="btn-reset burger">
       <span class="burger__line"></span>
@@ -444,7 +436,7 @@
         <h3 class="card__right-subtitle">Get a reader card</h3>
         <p class="card__right-descr">You will be able to see a reader card after logging into account or you can register a new account</p>
         <div class="card__right-bottom flex">
-          <button class="btn-reset card__right-btn">Sign Up</button>
+          <button class="btn-reset card__right-btn card__right-btn-register">Sign Up</button>
           <button class="btn-reset card__right-btn">Log in</button>
         </div>
       </div>
@@ -498,6 +490,43 @@
     </div>
   </div>
 </footer>
+
+    <div class="modal register-modal">
+  <div class="modal__overlay register-overlay">
+    <div class="modal__content register-content">
+      <button class="modal__btn btn-reset">
+        <svg>
+          <use xlink:href="img/sprite.svg#modal-close"></use>
+        </svg>
+      </button>
+      <h3 class="register-modal__title">Register</h3>
+      <form class="form register-modal__form" action="" id="register-form">
+        <label class="register-modal__label">
+          <span class="register-modal__name">First name</span>
+          <input type="text" class="register-modal__input register-modal__input-name input-reset">
+          <span class="error-text error-text-name"></span>
+        </label>
+        <label class="register-modal__label">
+          <span class="register-modal__name">Last name</span>
+          <input type="text" class="register-modal__input register-modal__input-surname input-reset">
+          <span class="error-text error-text-surname"></span>
+        </label>
+        <label class="register-modal__label">
+          <span class="register-modal__name">E-mail</span>
+          <input type="text" class="register-modal__input register-modal__input-email input-reset">
+          <span class="error-text error-text-email"></span>
+        </label>
+        <label class="register-modal__label">
+          <span class="register-modal__name">Password</span>
+          <input type="password" class="register-modal__input register-modal__input-password input-reset">
+          <span class="error-text error-text-password"></span>
+        </label>
+        <button class="btn-reset register-modal__btn" type="submit">Sign Up</button>
+      </form>
+      <span class="register-modal__descr">Already have an account?<button class="register-modal__btn-login btn-reset">Login</button></span>
+    </div>
+  </div>
+</div>
 
   </div>
   <script src="https://cdn.jsdelivr.net/npm/swiper@9/swiper-bundle.min.js"></script>
