@@ -1549,6 +1549,32 @@ img {
   width: 100%;
   margin-bottom: var(--main-offset);
 }
+.favorites__list-item:not(.favorites__list-item--active) {
+  -webkit-animation-name: fadeOut;
+  animation-name: fadeOut;
+  -webkit-animation-duration: 4s;
+  animation-duration: 4s;
+  -webkit-animation-timing-function: ease-out;
+  animation-timing-function: ease-out;
+  -webkit-animation-fill-mode: forwards;
+  animation-fill-mode: forwards;
+}
+@-webkit-keyframes fadeOut {
+  0% {
+    opacity: 1;
+  }
+  100% {
+    opacity: 0;
+  }
+}
+@keyframes fadeOut {
+  0% {
+    opacity: 1;
+  }
+  100% {
+    opacity: 0;
+  }
+}
 .favorites__list-item:nth-child(2n+1) {
   margin-right: auto;
   max-width: 640px;
@@ -1584,24 +1610,9 @@ img {
 }
 .favorites__list-item--active {
   position: relative;
-  -webkit-animation: fade-in 1s;
-  animation: fade-in 1s;
-}
-@-webkit-keyframes fade-in {
-  0% {
-    opacity: 0;
-  }
-  100% {
-    opacity: 1;
-  }
-}
-@keyframes fade-in {
-  0% {
-    opacity: 0;
-  }
-  100% {
-    opacity: 1;
-  }
+  opacity: 1;
+  -webkit-transition: opacity 0.5s ease-in;
+  transition: opacity 0.5s ease-in;
 }
 
 .shop {
@@ -2084,12 +2095,88 @@ img {
   outline: 1px solid transparent;
   opacity: 0.8;
 }
+.card__right-btn:disabled {
+  outline: 0.5;
+  pointer-events: none;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+}
 @media (max-width: 1269px) {
   .card__right {
     -webkit-box-align: center;
     -ms-flex-align: center;
     align-items: center;
   }
+}
+.card__left-info {
+  padding: 20px;
+  padding-bottom: 25px;
+  background-color: var(--color-tussock);
+}
+.card__left-info-list {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+  -webkit-box-pack: center;
+  -ms-flex-pack: center;
+  justify-content: center;
+}
+.card__user-name {
+  display: block;
+  padding: 8px 20px;
+  width: 100%;
+  margin-bottom: 25px;
+  background-color: var(--color-white);
+  font: var(--forum-regular-second);
+  color: var(--color-tussock);
+  border: none;
+  border-radius: 10px;
+}
+.card__user-number {
+  display: block;
+  padding: 8px 20px;
+  width: 100%;
+  background-color: var(--color-white);
+  font: var(--forum-regular-second);
+  color: var(--color-tussock);
+  border: none;
+  border-radius: 10px;
+}
+
+.info-list {
+  margin-top: 15px;
+}
+.info-list__item {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+  -ms-flex-direction: column;
+  flex-direction: column;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+}
+.info-list__item:not(:last-child) {
+  margin-right: 35px;
+}
+.info-list__item svg {
+  width: 20px;
+  height: 21px;
+}
+.info-list-name, .info-list-count {
+  display: block;
+  color: #000;
+  font: var(--inter-regular-small-mini);
+  font-size: 10px;
+  letter-spacing: 0.2px;
+  text-transform: capitalize;
 }
 
 .footer {
@@ -2834,7 +2921,299 @@ img {
   font-size: 10px;
   color: red;
 }
+.error-text-card {
+  display: block;
+  padding-left: 10px;
+  font-size: 20px;
+}
 
 .complete {
   outline: 1px solid green;
+}
+
+.profile-modal {
+  position: absolute;
+  opacity: 0;
+  visibility: hidden;
+  -webkit-transition: opacity 0.5s ease-in-out, visibility 0.5s ease-in-out;
+  transition: opacity 0.5s ease-in-out, visibility 0.5s ease-in-out;
+}
+.profile-modal--active {
+  position: relative;
+  opacity: 1;
+  visibility: visible;
+}
+.profile-modal__btn {
+  position: absolute;
+  right: 15px;
+  top: 15px;
+  width: 15px;
+  height: 15px;
+  stroke-width: 3px;
+}
+.profile-modal__btn svg {
+  width: 100%;
+  height: 100%;
+  -o-object-fit: cover;
+  object-fit: cover;
+  stroke: var(--color-black);
+  -webkit-transition: stroke 0.3s ease-in-out, opacity 0.3s ease-in-out;
+  transition: stroke 0.3s ease-in-out, opacity 0.3s ease-in-out;
+}
+.profile-modal__btn:focus-visible svg {
+  stroke: var(--color-tussock);
+  opacity: 0.5;
+}
+@media (min-width: 1025px) {
+  .profile-modal__btn:hover svg {
+    stroke: var(--color-tussock);
+    opacity: 0.5;
+  }
+}
+.profile-modal__btn:active svg {
+  stroke: var(--color-tussock);
+  opacity: 1;
+}
+.profile-modal__left {
+  background-color: var(--color-black);
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+  -ms-flex-direction: column;
+  flex-direction: column;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+  -webkit-box-pack: center;
+  -ms-flex-pack: center;
+  justify-content: center;
+  max-width: 170px;
+  width: 100%;
+}
+.profile-modal__initials {
+  background-color: var(--color-white);
+  padding: 30px 27px;
+  color: var(--color-tussock);
+  font: var(--inter-regular-second-mini);
+  text-transform: capitalize;
+  margin-bottom: 15px;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+}
+.profile-modal__name {
+  padding: 5px 15px;
+  max-width: 120px;
+  width: 100%;
+  background-color: var(--color-white);
+  font: var(--inter-regular-second-mini);
+  text-align: center;
+}
+.profile-modal__right {
+  padding: 40px 20px;
+}
+.profile-modal__title {
+  font: var(--forum-regular-main);
+  line-height: 20px;
+  letter-spacing: 0.8px;
+  text-transform: uppercase;
+  margin-bottom: 40px;
+}
+.profile-modal__list {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  margin-bottom: 20px;
+}
+.profile-modal__list-item {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+  -ms-flex-direction: column;
+  flex-direction: column;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+}
+.profile-modal__list-item:not(:last-child) {
+  margin-right: 20px;
+}
+.profile-modal__list-item svg {
+  width: 20px;
+  height: 21px;
+  margin: 10px 0;
+}
+.profile-modal__list-name, .profile-modal__list-count {
+  display: block;
+  color: #000;
+  font: var(--inter-regular-second-mini);
+  letter-spacing: 0.4px;
+  text-transform: capitalize;
+}
+.profile-modal__list-count {
+  font-size: 10px;
+}
+.profile-modal__subtitle {
+  display: block;
+  color: var(--color-black);
+  font: var(--inter-regular-small-mini);
+  font-size: 25px;
+  margin-bottom: 30px;
+}
+.profile-modal__list-books {
+  margin-bottom: 40px;
+}
+.profile-modal__list-books-item {
+  position: relative;
+  padding-left: 25px;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+}
+.profile-modal__list-books-item:not(:last-child) {
+  margin-bottom: 10px;
+}
+.profile-modal__list-books-item::before {
+  content: "";
+  position: absolute;
+  left: 10px;
+  width: 5px;
+  height: 5px;
+  border-radius: 100%;
+  background-color: var(--color-black);
+}
+.profile-modal__list-books-name {
+  color: var(--color-black);
+  font: var(--inter-regular-second-mini);
+  letter-spacing: 2px;
+  text-transform: capitalize;
+}
+.profile-modal__card-number {
+  color: var(--color-black);
+  font: var(--inter-regular-second-mini);
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+}
+.profile-modal__card-number label {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+  cursor: pointer;
+  -webkit-transition: opacity 0.3s ease-in-out;
+  transition: opacity 0.3s ease-in-out;
+}
+.profile-modal__card-number label svg {
+  width: 13px;
+  height: 12px;
+}
+.profile-modal__card-number label:focus-visible {
+  opacity: 0.6;
+}
+@media (min-width: 1025px) {
+  .profile-modal__card-number label:hover {
+    opacity: 0.6;
+  }
+}
+.profile-modal__card-number label:active {
+  opacity: 0.9;
+}
+.profile-modal__card-number-copy {
+  color: var(--color-tussock);
+  padding-left: 15px;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  max-width: 140px;
+}
+.profile-modal__card-number-copy::-webkit-input-placeholder {
+  font: var(--inter-regular-second-mini);
+  color: var(--color-tussock);
+}
+.profile-modal__card-number-copy::-moz-placeholder {
+  font: var(--inter-regular-second-mini);
+  color: var(--color-tussock);
+}
+.profile-modal__card-number-copy:-ms-input-placeholder {
+  font: var(--inter-regular-second-mini);
+  color: var(--color-tussock);
+}
+.profile-modal__card-number-copy::-ms-input-placeholder {
+  font: var(--inter-regular-second-mini);
+  color: var(--color-tussock);
+}
+.profile-modal__card-number-copy::placeholder {
+  font: var(--inter-regular-second-mini);
+  color: var(--color-tussock);
+}
+
+.profile-overlay {
+  position: fixed;
+  left: 0;
+  right: 0;
+  top: 0;
+  bottom: 0;
+  background-color: rgba(0, 0, 0, 0.5);
+  opacity: 0;
+  visibility: hidden;
+  z-index: 2;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+  -webkit-box-pack: center;
+  -ms-flex-pack: center;
+  justify-content: center;
+  height: 100vh;
+  width: 100%;
+  -webkit-transition: opacity 0.5s ease-in-out, visibility 0.5s ease-in-out;
+  transition: opacity 0.5s ease-in-out, visibility 0.5s ease-in-out;
+}
+.profile-overlay--active {
+  opacity: 1;
+  visibility: visible;
+}
+
+.profile-content {
+  background-color: var(--color-white);
+  max-width: 600px;
+  width: 100%;
+  height: auto;
+  opacity: 0;
+  visibility: hidden;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  position: relative;
+  border-radius: 0;
+  -webkit-transform: translateY(-200px);
+  -ms-transform: translateY(-200px);
+  transform: translateY(-200px);
+  -webkit-transition: opacity 0.5s ease-in-out, visibility 0.5s ease-in-out, -webkit-transform 0.5s ease-in-out;
+  transition: opacity 0.5s ease-in-out, visibility 0.5s ease-in-out, -webkit-transform 0.5s ease-in-out;
+  transition: opacity 0.5s ease-in-out, visibility 0.5s ease-in-out, transform 0.5s ease-in-out;
+  transition: opacity 0.5s ease-in-out, visibility 0.5s ease-in-out, transform 0.5s ease-in-out, -webkit-transform 0.5s ease-in-out;
+}
+.profile-content--active {
+  opacity: 1;
+  visibility: visible;
+  -webkit-transform: none;
+  -ms-transform: none;
+  transform: none;
 }
