@@ -437,7 +437,7 @@
         <p class="card__right-descr">You will be able to see a reader card after logging into account or you can register a new account</p>
         <div class="card__right-bottom flex">
           <button class="btn-reset card__right-btn card__right-btn-register">Sign Up</button>
-          <button class="btn-reset card__right-btn">Log in</button>
+          <button class="btn-reset card__right-btn card__right-btn-login">Log in</button>
         </div>
       </div>
     </div>
@@ -494,7 +494,7 @@
     <div class="modal register-modal">
   <div class="modal__overlay register-overlay">
     <div class="modal__content register-content">
-      <button class="modal__btn btn-reset">
+      <button class="modal__btn register-modal__btn btn-reset">
         <svg>
           <use xlink:href="img/sprite.svg#modal-close"></use>
         </svg>
@@ -504,26 +504,53 @@
         <label class="register-modal__label">
           <span class="register-modal__name">First name</span>
           <input type="text" class="register-modal__input register-modal__input-name input-reset">
-          <span class="error-text error-text-name"></span>
+          <span class="error-text register-modal__error-text-name"></span>
         </label>
         <label class="register-modal__label">
           <span class="register-modal__name">Last name</span>
           <input type="text" class="register-modal__input register-modal__input-surname input-reset">
-          <span class="error-text error-text-surname"></span>
+          <span class="error-text register-modal__error-text-surname"></span>
         </label>
         <label class="register-modal__label">
           <span class="register-modal__name">E-mail</span>
           <input type="text" class="register-modal__input register-modal__input-email input-reset">
-          <span class="error-text error-text-email"></span>
+          <span class="error-text register-modal__error-text-email"></span>
         </label>
         <label class="register-modal__label">
           <span class="register-modal__name">Password</span>
           <input type="password" class="register-modal__input register-modal__input-password input-reset">
-          <span class="error-text error-text-password"></span>
+          <span class="error-text register-modal__error-text-password"></span>
         </label>
-        <button class="btn-reset register-modal__btn" type="submit">Sign Up</button>
+        <button class="btn-reset register-modal__btn-submit" type="submit">Sign Up</button>
       </form>
       <span class="register-modal__descr">Already have an account?<button class="register-modal__btn-login btn-reset">Login</button></span>
+    </div>
+  </div>
+</div>
+
+    <div class="modal login-modal">
+  <div class="modal__overlay login-overlay">
+    <div class="modal__content login-content">
+      <button class="modal__btn login-modal__btn btn-reset">
+        <svg>
+          <use xlink:href="img/sprite.svg#modal-close"></use>
+        </svg>
+      </button>
+      <h3 class="login-modal__title">Login</h3>
+      <form class="form login-modal__form" action="" id="login-form">
+        <label class="login-modal__label">
+          <span class="login-modal__name">E-mail or readers card</span>
+          <input type="text" class="login-modal__input login-modal__input-login input-reset">
+          <span class="error-text login-modal__error-text-login"></span>
+        </label>
+        <label class="login-modal__label">
+          <span class="login-modal__name">Password</span>
+          <input type="password" class="login-modal__input login-modal__input-password input-reset">
+          <span class="error-text login-modal__error-text-password"></span>
+        </label>
+        <button class="btn-reset login-modal__btn-login" type="submit">Log In</button>
+      </form>
+      <span class="login-modal__descr">Don’t have an account?<button class="login-modal__btn-register btn-reset">Register</button></span>
     </div>
   </div>
 </div>
