@@ -416,14 +416,16 @@
       <div class="card__left flex">
         <h3 class="card__left-subtitle">Find your Library card</h3>
         <div class="card__left-bottom">
-          <form action="#" class="form card__form flex">
+          <form action="#" class="form card__form flex" id="card-form">
             <div class="card__form-top flex">
               <span class="card__name">Brooklyn Public Library</span>
               <label class="card__label">
-                <input type="text" class="input-reset card__form-input" placeholder="Reader's name" required pattern="^[a-zA-Z]+$">
+                <input type="text" class="input-reset card__form-input card__form-input-name" placeholder="Reader's name">
+                <span class="error-text-card error-text card__error-text-name"></span>
               </label>
               <label class="card__label">
-                <input type="text" class="input-reset card__form-input" placeholder="Card number" required pattern="[A-Z]{1}[0-9]+$">
+                <input type="text" class="input-reset card__form-input card__form-input-number" placeholder="Card number">
+                <span class="error-text-card error-text card__error-text-number"></span>
               </label>
             </div>
             <div class="card__form-bottom flex">
@@ -551,6 +553,65 @@
         <button class="btn-reset login-modal__btn-login" type="submit">Log In</button>
       </form>
       <span class="login-modal__descr">Don’t have an account?<button class="login-modal__btn-register btn-reset">Register</button></span>
+    </div>
+  </div>
+</div>
+
+    <div class="modal profile-modal">
+  <div class="modal__overlay profile-overlay">
+    <div class="modal__content profile-content">
+      <div class="profile-modal__left">
+        <span class="profile-modal__initials">JD</span>
+        <span class="profile-modal__name">John Doe</span>
+      </div>
+      <div class="profile-modal__right">
+        <h3 class="profile-modal__title">My profile</h3>
+        <ul class="list-reset profile-modal__list">
+          <li class="profile-modal__list-item">
+            <span class="profile-modal__list-name">Visits</span>
+            <svg>
+              <use xlink:href="img/sprite.svg#visits"></use>
+            </svg>
+            <span class="profile-modal__list-count">23</span>
+          </li>
+          <li class="profile-modal__list-item">
+            <span class="profile-modal__list-name">Bonuses</span>
+            <svg>
+              <use xlink:href="img/sprite.svg#bonuses"></use>
+            </svg>
+            <span class="profile-modal__list-count">1240</span>
+          </li>
+          <li class="profile-modal__list-item">
+            <span class="profile-modal__list-name">Books</span>
+            <svg>
+              <use xlink:href="img/sprite.svg#books"></use>
+            </svg>
+            <span class="profile-modal__list-count">2</span>
+          </li>
+        </ul>
+        <strong class="profile-modal__subtitle">Rented books</strong>
+        <ul class="list-reset profile-modal__list-books">
+          <li class="profile-modal__list-books-item">
+            <span class="profile-modal__list-books-name">The Last Queen, Clive Irving</span>
+          </li>
+          <li class="profile-modal__list-books-item">
+            <span class="profile-modal__list-books-name">Dominicana, Angie Cruz</span>
+          </li>
+        </ul>
+        <span class="profile-modal__card-number">Card number
+          <label for="number-copy">
+            <input class="btn-reset profile-modal__card-number-copy" id="number-copy" value="F00234030" type="text" readonly>
+            <svg>
+              <use xlink:href="img/sprite.svg#copy"></use>
+            </svg>
+          </label>
+        </span>
+      </div>
+      <button class="modal__btn profile-modal__btn btn-reset">
+        <svg>
+          <use xlink:href="img/sprite.svg#modal-close"></use>
+        </svg>
+      </button>
     </div>
   </div>
 </div>
