@@ -9,11 +9,13 @@ const progressBar = player.querySelector(".player__controls-progressbar");
 const playerAuthor = player.querySelector('.player__author');
 const playerTrackName = player.querySelector('.player__trackname');
 const trackPoster = player.querySelector('.player__poster-img');
+const trackLength = player.querySelector('.player__controls-length');
 
 audio.src = 'resources/instasamka-who-i-am.mp3';
 playerAuthor.textContent = 'instasamka';
 playerTrackName.textContent = 'WHO I AM';
 trackPoster.src = 'img/who-i-am-poster.jpg';
+trackLength.textContent = '2:16';
 let isPlay = false;
 let playNum = 0;
 const [trackPath, trackAuthor, trackName, trackPosterImg] = [
@@ -32,10 +34,12 @@ const togglePlay = () => {
     audio.play()
     isPlay = true;
     playBtn.classList.add('pause');
+    trackPoster.classList.add('pause');
   } else {
     audio.pause()
     isPlay = false;
     playBtn.classList.remove('pause');
+    trackPoster.classList.remove('pause');
   }
 };
 
