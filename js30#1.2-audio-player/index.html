@@ -4,7 +4,7 @@
   <meta charset="UTF-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Title</title>
+  <title>Audio player</title>
   <link rel="stylesheet" href="main.css">
 </head>
 <body>
@@ -12,7 +12,20 @@
     <main class="main">
       <section class="player">
   <div class="container player__container">
-    <audio class="audio" src="resources/instasamka-who-i-am.mp3"></audio>
+    <div class="player__box">
+      <audio class="audio"></audio>
+      <button class="btn-reset player__btn"></button>
+      <button class="btn-reset player__btn-next"></button>
+      <button class="btn-reset player__btn-prev"></button>
+      <div class="timeline">
+        <div class="progress"></div>
+      </div>
+      <div class="time">
+        <span class="current">0:00</span>
+        <span class="divider">/</span>
+        <span class="length"></span>
+      </div>
+    </div>
   </div>
 </section>
 
