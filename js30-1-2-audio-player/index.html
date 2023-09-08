@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="ru">
+<html lang="en">
 <head>
   <meta charset="UTF-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -12,18 +12,32 @@
     <main class="main">
       <section class="player">
   <div class="container player__container">
-    <div class="player__box">
-      <audio class="audio"></audio>
-      <button class="btn-reset player__btn"></button>
-      <button class="btn-reset player__btn-next"></button>
-      <button class="btn-reset player__btn-prev"></button>
-      <div class="timeline">
-        <div class="progress"></div>
-      </div>
-      <div class="time">
-        <span class="current">0:00</span>
-        <span class="divider">/</span>
-        <span class="length"></span>
+    <div class="player__modal">
+      <div class="player__modal-overlay">
+        <div class="player__modal-content">
+          <div class="player__poster">
+            <img class="player__poster-img" alt="">
+          </div>
+          <div class="player__bottom">
+            <audio class="audio"></audio>
+            <div class="player__text">
+              <strong class="player__trackname"></strong>
+              <span class="player__author"></span>
+            </div>
+            <div class="player__controls">
+              <span class="player__controls-current">0:00</span>
+              <div class="player__controls-line">
+                <div class="player__controls-progressbar"></div>
+              </div>
+              <span class="player__controls-length"></span>
+          </div>
+            <div class="player__btns">
+              <button class="btn-reset player__btn-prev"></button>
+              <button class="btn-reset player__btn"></button>
+              <button class="btn-reset player__btn-next"></button>
+            </div>
+          </div>
+        </div>
       </div>
     </div>
   </div>
