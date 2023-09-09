@@ -33,6 +33,18 @@ const [trackPath, trackAuthor, trackName, trackPosterImg] = [
   ['who-i-am-poster.jpg', 'v-moej-golove.jpg', 'etot-ogon-poster.jpg', 'bestie-poster.jpg', 'volosy-nazad-poster.jpg', 'high-beams-poster.jpg', 'tia-tamera-poster.jpg', 'shimmy-shimmy-ya-poster.jpg'],
 ];
 
+let intervalID;
+let hue = 0;
+let isOutlineColor = false;
+
+function changeOutlineColor() {
+    hue += 1;
+    const color = `hsl(${hue}, 100%, 50%)`;
+    const boxShadow = `0 0 40px 20px ${color}`;
+    player.style.outlineColor = color;
+    player.style.boxShadow = boxShadow;
+}
+
 const togglePlay = () => {
   if (!isPlay) {
     audio.play()
@@ -44,16 +56,27 @@ const togglePlay = () => {
     `
     playBtn.classList.add('pause');
     trackPoster.classList.add('pause');
+
+    if (!isOutlineColor) {
+      intervalID = setInterval(changeOutlineColor, 50);
+      isOutlineColor = true;
+    }
   } else {
     audio.pause()
     isPlay = false;
-        playBtn.innerHTML = `
+    playBtn.innerHTML = `
     <svg>
       <use xlink:href="img/sprite.svg#play"></use>
     </svg>
     `
     playBtn.classList.remove('pause');
     trackPoster.classList.remove('pause');
+    if(isOutlineColor) {
+      clearInterval(intervalID);
+      isOutlineColor = false;
+      player.style.outlineColor = null;
+      player.style.boxShadow = null;
+    }
   }
 };
 
@@ -72,7 +95,7 @@ const playTrack = (direction) => {
     playNum = 0;
   }
   if (!isPlay) {
-        playBtn.innerHTML = `
+    playBtn.innerHTML = `
     <svg>
       <use xlink:href="img/sprite.svg#play"></use>
     </svg>
@@ -149,20 +172,18 @@ setInterval(() => {
 
   } else if (!isPlayRepeatPlayList && playNum === trackPath.length - 1 && !isPlayRepeatTrack) {
     if (Math.trunc(audio.currentTime) === Math.trunc(audio.duration)) {
-          playBtn.innerHTML = `
-    <svg>
-      <use xlink:href="img/sprite.svg#play"></use>
-    </svg>
-    `
-      playBtn.classList.add('pause');
+      playBtn.classList.remove('pause');
       trackPoster.classList.remove('pause');
+      clearInterval(intervalID);
+      isOutlineColor = false;
+      player.style.outlineColor = null;
+      player.style.boxShadow = null;
       return;
     }
 
 
   } else if (isPlayRepeatPlayList && playNum !== trackPath.length - 1 && !isPlayRepeatTrack) {
     if (Math.trunc(audio.currentTime) === Math.trunc(audio.duration)) playTrack(1)
-
 
   } else if (isPlayRepeatPlayList && playNum === trackPath.length - 1 && !isPlayRepeatTrack) {
     if (Math.trunc(audio.currentTime) === Math.trunc(audio.duration)) {
@@ -173,7 +194,5 @@ setInterval(() => {
 
   } else if (isPlayRepeatTrack) {
     if (Math.trunc(audio.currentTime) === Math.trunc(audio.duration)) playTrack(0)
-
-
   }
 }, 500);
