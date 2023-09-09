@@ -16,7 +16,7 @@ audio.src = 'resources/instasamka-who-i-am.mp3';
 playerAuthor.textContent = 'instasamka';
 playerTrackName.textContent = 'WHO I AM';
 trackPoster.src = 'img/who-i-am-poster.jpg';
-trackLength.textContent = audio.duration;
+trackLength.textContent = '2:16';
 let isPlay = false;
 let isPlayRepeatPlayList = false;
 let isPlayRepeatTrack = false;
@@ -37,11 +37,21 @@ const togglePlay = () => {
   if (!isPlay) {
     audio.play()
     isPlay = true;
+    playBtn.innerHTML = `
+    <svg>
+      <use xlink:href="img/sprite.svg#pause"></use>
+    </svg>
+    `
     playBtn.classList.add('pause');
     trackPoster.classList.add('pause');
   } else {
     audio.pause()
     isPlay = false;
+        playBtn.innerHTML = `
+    <svg>
+      <use xlink:href="img/sprite.svg#play"></use>
+    </svg>
+    `
     playBtn.classList.remove('pause');
     trackPoster.classList.remove('pause');
   }
@@ -62,7 +72,12 @@ const playTrack = (direction) => {
     playNum = 0;
   }
   if (!isPlay) {
-    playBtn.classList.remove('pause');
+        playBtn.innerHTML = `
+    <svg>
+      <use xlink:href="img/sprite.svg#play"></use>
+    </svg>
+    `
+    playBtn.classList.add('pause');
     trackPoster.classList.remove('pause');
   }
   audio.src = `resources/${trackPath[playNum]}`;
@@ -134,7 +149,12 @@ setInterval(() => {
 
   } else if (!isPlayRepeatPlayList && playNum === trackPath.length - 1 && !isPlayRepeatTrack) {
     if (Math.trunc(audio.currentTime) === Math.trunc(audio.duration)) {
-      playBtn.classList.remove('pause');
+          playBtn.innerHTML = `
+    <svg>
+      <use xlink:href="img/sprite.svg#play"></use>
+    </svg>
+    `
+      playBtn.classList.add('pause');
       trackPoster.classList.remove('pause');
       return;
     }
