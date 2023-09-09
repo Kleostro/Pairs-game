@@ -3,6 +3,7 @@ const audio = player.querySelector('.audio');
 const playBtn = player.querySelector('.player__btn');
 const nextBtn = player.querySelector('.player__btn-next');
 const prevBtn = player.querySelector('.player__btn-prev');
+const repeatBtn = player.querySelector('.player__btn-repeat');
 const playerControls = player.querySelector('.player__controls');
 const playerLine = player.querySelector('.player__controls-line');
 const progressBar = player.querySelector(".player__controls-progressbar");
@@ -15,8 +16,11 @@ audio.src = 'resources/instasamka-who-i-am.mp3';
 playerAuthor.textContent = 'instasamka';
 playerTrackName.textContent = 'WHO I AM';
 trackPoster.src = 'img/who-i-am-poster.jpg';
-trackLength.textContent = '2:16';
+trackLength.textContent = audio.duration;
 let isPlay = false;
+let isPlayRepeatPlayList = false;
+let isPlayRepeatTrack = false;
+let repeatBtnCount = 0;
 let playNum = 0;
 const [trackPath, trackAuthor, trackName, trackPosterImg] = [
   // путь к треку
@@ -51,19 +55,26 @@ audio.addEventListener("loadeddata", () => {
 });
 
 const playTrack = (direction) => {
-  trackPoster.classList.add('pause');
   playNum += direction;
   if (playNum < 0) {
     playNum = trackPath.length - 1;
   } else if (playNum >= trackPath.length) {
     playNum = 0;
   }
+  if (!isPlay) {
+    playBtn.classList.remove('pause');
+    trackPoster.classList.remove('pause');
+  }
   audio.src = `resources/${trackPath[playNum]}`;
   trackPoster.src = `img/${trackPosterImg[playNum]}`;
   playerTrackName.textContent = trackName[playNum];
   playerAuthor.textContent = trackAuthor[playNum];
-  isPlay = false;
-  togglePlay()
+  if (!isPlay) {
+    return;
+  } else {
+    isPlay = false;
+    togglePlay()
+  }
 };
 
 nextBtn.addEventListener("click", () => {
@@ -73,6 +84,27 @@ nextBtn.addEventListener("click", () => {
 prevBtn.addEventListener("click", () => {
   playTrack(-1)
 });
+
+repeatBtn.addEventListener('click', () => {
+  if (repeatBtnCount === 0) {
+    repeatBtn.classList.add('repeat1');
+    repeatBtnCount++
+    return !isPlayRepeatPlayList ? isPlayRepeatPlayList = true : isPlayRepeatPlayList = false;
+  } else if (repeatBtnCount === 1) {
+    repeatBtnCount++
+    repeatBtn.classList.remove('repeat1');
+    repeatBtn.classList.add('repeat2');
+    repeatBtn.textContent = '1';
+    return isPlayRepeatTrack = true;
+  } else {
+    repeatBtn.classList.remove('repeat1');
+    repeatBtn.classList.remove('repeat2');
+    repeatBtn.textContent = '';
+    repeatBtnCount = 0;
+    isPlayRepeatTrack = false;
+    isPlayRepeatPlayList = false;
+  }
+})
 
 playerLine.addEventListener('click', e => {
   const timelineWidth = window.getComputedStyle(playerLine).width;
@@ -94,7 +126,34 @@ const getTimeCodeFromNum = (num) => {
 setInterval(() => {
   progressBar.style.width = audio.currentTime / audio.duration * 100 + "%";
   playerControls.querySelector('.player__controls-current').textContent = getTimeCodeFromNum(audio.currentTime);
-  if (Math.trunc(audio.currentTime) === Math.trunc(audio.duration)) {
-    playTrack(1)
+  console.log(isPlayRepeatPlayList, isPlayRepeatTrack, playNum)
+
+  if (!isPlayRepeatPlayList && playNum !== trackPath.length - 1 && !isPlayRepeatTrack) {
+    if (Math.trunc(audio.currentTime) === Math.trunc(audio.duration)) playTrack(1)
+
+
+  } else if (!isPlayRepeatPlayList && playNum === trackPath.length - 1 && !isPlayRepeatTrack) {
+    if (Math.trunc(audio.currentTime) === Math.trunc(audio.duration)) {
+      playBtn.classList.remove('pause');
+      trackPoster.classList.remove('pause');
+      return;
+    }
+
+
+  } else if (isPlayRepeatPlayList && playNum !== trackPath.length - 1 && !isPlayRepeatTrack) {
+    if (Math.trunc(audio.currentTime) === Math.trunc(audio.duration)) playTrack(1)
+
+
+  } else if (isPlayRepeatPlayList && playNum === trackPath.length - 1 && !isPlayRepeatTrack) {
+    if (Math.trunc(audio.currentTime) === Math.trunc(audio.duration)) {
+      playNum = 0;
+      playTrack(0)
+    }
+
+
+  } else if (isPlayRepeatTrack) {
+    if (Math.trunc(audio.currentTime) === Math.trunc(audio.duration)) playTrack(0)
+
+
   }
 }, 500);
