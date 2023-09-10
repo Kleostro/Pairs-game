@@ -1,49 +1,65 @@
-const player = document.querySelector('.player__modal-content');
+const player = document.querySelector('.player__container');
 const audio = player.querySelector('.audio');
 const playBtn = player.querySelector('.player__btn');
 const nextBtn = player.querySelector('.player__btn-next');
 const prevBtn = player.querySelector('.player__btn-prev');
+const shuffledBtn = player.querySelector('.player__btn-mix');
 const repeatBtn = player.querySelector('.player__btn-repeat');
 const playerControls = player.querySelector('.player__controls');
 const playerLine = player.querySelector('.player__controls-line');
-const progressBar = player.querySelector(".player__controls-progressbar");
+const progressBar = player.querySelector('.player__controls-progressbar');
 const playerAuthor = player.querySelector('.player__author');
 const playerTrackName = player.querySelector('.player__trackname');
 const trackPoster = player.querySelector('.player__poster-img');
 const trackLength = player.querySelector('.player__controls-length');
 
-audio.src = 'resources/instasamka-who-i-am.mp3';
-playerAuthor.textContent = 'instasamka';
-playerTrackName.textContent = 'WHO I AM';
-trackPoster.src = 'img/who-i-am-poster.jpg';
-trackLength.textContent = '2:16';
+const trackInfo = [
+  // путь к треку
+  ['instasamka-who-i-am.mp3', 'instasamka-v-moej-golove.mp3', 'vibessmusic-alone.mp3', 'billie-eilish-all-the-good-girls-go-to-hell.mp3', 'verdun-you-right-x-luxurious.mp3', 'tkay-maidza-high-beams-jpegmafia-remix.mp3', 'doja-cat-tia-tamera.mp3', 'lana-del-rey-music-to-watch-boys-to.mp3'],
+  // исполнитель
+  ['INSTASAMKA', 'INSTASAMKA', 'vibessmusic', 'BILLIE EILISH', 'VERDUN', 'Tkay Maidza', 'Doja Cat', 'Lana Del Rey'],
+  // название трека
+  ['Who I Am', 'В моей голове', 'Alone', 'All The Good Girls Go To Hell', 'You right x luxurious', 'High Beams', 'Tia Tamera', 'Music To Watch Boys To'],
+  // путь к обложке
+  ['who-i-am-poster.webp', 'v-moej-golove.webp', 'alone-poster.webp', 'all-the-good-girls-go-to-hell-poster.webp', 'you-right-x-luxurious-poster.webp', 'high-beams-poster.webp', 'tia-tamera-poster.webp', 'music-to-watch-boys-to-poster.webp'],
+];
+
+let [trackPath, trackAuthor, trackName, trackPosterImg] = trackInfo;
+
 let isPlay = false;
 let isPlayRepeatPlayList = false;
 let isPlayRepeatTrack = false;
+let isOutlineColor = false;
+let isShuffledTrackArr = false;
 let repeatBtnCount = 0;
 let playNum = 0;
-const [trackPath, trackAuthor, trackName, trackPosterImg] = [
-  // путь к треку
-  ['instasamka-who-i-am.mp3', 'instasamka-v-moej-golove.mp3', 'instasamka-etot-ogon.mp3', 'instasamka-bestie.mp3', 'instasamka-volosy-nazad.mp3', 'tkay-maidza-high-beams-jpegmafia-remix.mp3', 'doja-cat-tia-tamera.mp3', 'mjejjbi-bjejjbi-shimmy-shimmy-ya.mp3'],
-  // исполнитель
-  ['INSTASAMKA', 'INSTASAMKA', 'INSTASAMKA', 'INSTASAMKA', 'INSTASAMKA', 'Tkay Maidza', 'Doja Cat', 'Мэйби Бэйби'],
-  // название трека
-  ['Who I Am', 'В моей голове', 'Этот огонь', 'BESTIE', 'Волосы назад', 'High Beams', 'Tia Tamera', 'Shimmy Shimmy Ya!'],
-  // путь к обложке
-  ['who-i-am-poster.jpg', 'v-moej-golove.jpg', 'etot-ogon-poster.jpg', 'bestie-poster.jpg', 'volosy-nazad-poster.jpg', 'high-beams-poster.jpg', 'tia-tamera-poster.jpg', 'shimmy-shimmy-ya-poster.jpg'],
-];
-
-let intervalID;
 let hue = 0;
-let isOutlineColor = false;
+let intervalID;
 
-function changeOutlineColor() {
-    hue += 1;
-    const color = `hsl(${hue}, 100%, 50%)`;
-    const boxShadow = `0 0 40px 20px ${color}`;
-    player.style.outlineColor = color;
-    player.style.boxShadow = boxShadow;
+const initialTrack = () => {
+  audio.src = 'resources/audio/instasamka-who-i-am.mp3';
+  playerAuthor.textContent = 'instasamka';
+  playerTrackName.textContent = 'WHO I AM';
+  trackPoster.src = 'img/who-i-am-poster.webp';
+  trackLength.textContent = '2:16';
 }
+
+const shuffleArray = (arr) => {
+  for (let i = arr[0].length - 1; i > 0; i--) {
+    const j = Math.floor(Math.random() * (i + 1));
+    for (let k = 0; k < arr.length; k++) {
+      [arr[k][i], arr[k][j]] = [arr[k][j], arr[k][i]];
+    }
+  }
+};
+
+const changeOutlineColor = () => {
+  hue += 1;
+  const color = `hsl(${hue}, 100%, 80%)`;
+  const boxShadow = `0 0 40px 20px ${color}`;
+  player.style.outlineColor = color;
+  player.style.boxShadow = boxShadow;
+};
 
 const togglePlay = () => {
   if (!isPlay) {
@@ -51,9 +67,9 @@ const togglePlay = () => {
     isPlay = true;
     playBtn.innerHTML = `
     <svg>
-      <use xlink:href="img/sprite.svg#pause"></use>
+      <use xlink:href='img/sprite.svg#pause'></use>
     </svg>
-    `
+    `;
     playBtn.classList.add('pause');
     trackPoster.classList.add('pause');
 
@@ -66,12 +82,12 @@ const togglePlay = () => {
     isPlay = false;
     playBtn.innerHTML = `
     <svg>
-      <use xlink:href="img/sprite.svg#play"></use>
+      <use xlink:href='img/sprite.svg#play'></use>
     </svg>
-    `
+    `;
     playBtn.classList.remove('pause');
     trackPoster.classList.remove('pause');
-    if(isOutlineColor) {
+    if (isOutlineColor) {
       clearInterval(intervalID);
       isOutlineColor = false;
       player.style.outlineColor = null;
@@ -79,13 +95,6 @@ const togglePlay = () => {
     }
   }
 };
-
-playBtn.addEventListener("click", togglePlay);
-
-audio.addEventListener("loadeddata", () => {
-  playerControls.querySelector('.player__controls-length').textContent = getTimeCodeFromNum(audio.duration);
-  audio.volume = 1;
-});
 
 const playTrack = (direction) => {
   playNum += direction;
@@ -96,14 +105,14 @@ const playTrack = (direction) => {
   }
   if (!isPlay) {
     playBtn.innerHTML = `
-    <svg>
-      <use xlink:href="img/sprite.svg#play"></use>
-    </svg>
-    `
+      <svg>
+        <use xlink:href='img/sprite.svg#play'></use>
+      </svg>
+      `;
     playBtn.classList.add('pause');
     trackPoster.classList.remove('pause');
   }
-  audio.src = `resources/${trackPath[playNum]}`;
+  audio.src = `resources/audio/${trackPath[playNum]}`;
   trackPoster.src = `img/${trackPosterImg[playNum]}`;
   playerTrackName.textContent = trackName[playNum];
   playerAuthor.textContent = trackAuthor[playNum];
@@ -115,11 +124,51 @@ const playTrack = (direction) => {
   }
 };
 
-nextBtn.addEventListener("click", () => {
+shuffledBtn.addEventListener('click', () => {
+  if (!isShuffledTrackArr) {
+    isShuffledTrackArr = true;
+    shuffledBtn.classList.add('active');
+    shuffleArray(trackInfo);
+    [trackPath, trackAuthor, trackName, trackPosterImg] = trackInfo;
+    playNum = 0;
+    isPlay = false;
+    playTrack(0)
+    togglePlay()
+    return;
+  } else {
+    isShuffledTrackArr = false;
+    shuffledBtn.classList.remove('active');
+    playBtn.classList.remove('pause');
+    trackPoster.classList.remove('pause');
+    [trackPath, trackAuthor, trackName, trackPosterImg] = [
+      // путь к треку
+      ['instasamka-who-i-am.mp3', 'instasamka-v-moej-golove.mp3', 'vibessmusic-alone.mp3', 'billie-eilish-all-the-good-girls-go-to-hell.mp3', 'verdun-you-right-x-luxurious.mp3', 'tkay-maidza-high-beams-jpegmafia-remix.mp3', 'doja-cat-tia-tamera.mp3', 'lana-del-rey-music-to-watch-boys-to.mp3'],
+      // исполнитель
+      ['INSTASAMKA', 'INSTASAMKA', 'vibessmusic', 'BILLIE EILISH', 'VERDUN', 'Tkay Maidza', 'Doja Cat', 'Lana Del Rey'],
+      // название трека
+      ['Who I Am', 'В моей голове', 'Alone', 'All The Good Girls Go To Hell', 'You right x luxurious', 'High Beams', 'Tia Tamera', 'Music To Watch Boys To'],
+      // путь к обложке
+      ['who-i-am-poster.webp', 'v-moej-golove.webp', 'alone-poster.webp', 'all-the-good-girls-go-to-hell-poster.webp', 'you-right-x-luxurious-poster.webp', 'high-beams-poster.webp', 'tia-tamera-poster.webp', 'music-to-watch-boys-to-poster.webp'],
+    ];
+    playNum = 0;
+    isPlay = false;
+    playTrack(0)
+    togglePlay()
+  }
+});
+
+playBtn.addEventListener('click', togglePlay);
+
+audio.addEventListener('loadeddata', () => {
+  playerControls.querySelector('.player__controls-length').textContent = getTimeCodeFromNum(audio.duration);
+  audio.volume = 1;
+});
+
+nextBtn.addEventListener('click', () => {
   playTrack(1)
 });
 
-prevBtn.addEventListener("click", () => {
+prevBtn.addEventListener('click', () => {
   playTrack(-1)
 });
 
@@ -162,9 +211,9 @@ const getTimeCodeFromNum = (num) => {
 };
 
 setInterval(() => {
-  progressBar.style.width = audio.currentTime / audio.duration * 100 + "%";
+  progressBar.style.width = audio.currentTime / audio.duration * 100 + '%';
   playerControls.querySelector('.player__controls-current').textContent = getTimeCodeFromNum(audio.currentTime);
-  console.log(isPlayRepeatPlayList, isPlayRepeatTrack, playNum)
+
 
   if (!isPlayRepeatPlayList && playNum !== trackPath.length - 1 && !isPlayRepeatTrack) {
     if (Math.trunc(audio.currentTime) === Math.trunc(audio.duration)) playTrack(1)
@@ -196,3 +245,5 @@ setInterval(() => {
     if (Math.trunc(audio.currentTime) === Math.trunc(audio.duration)) playTrack(0)
   }
 }, 500);
+
+initialTrack()
