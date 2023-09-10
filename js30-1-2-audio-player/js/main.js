@@ -1,5 +1,3 @@
-import { initOciliator } from "./components/customCursor.js";
-
 const player = document.querySelector('.player__container');
 const audio = player.querySelector('.audio');
 const playBtn = player.querySelector('.player__btn');
@@ -249,5 +247,3 @@ setInterval(() => {
 }, 500);
 
 initialTrack()
-
-initOciliator();
