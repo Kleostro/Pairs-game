@@ -4,7 +4,7 @@
   <meta charset="UTF-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Title</title>
+  <title>Image galery</title>
   <link rel="stylesheet" href="main.css">
 </head>
 <body>
@@ -18,15 +18,15 @@
     </a>
     <div class="header-search">
       <label class="header-search__label">
-        <input type="text" class="header-search__input" placeholder="Search...">
+        <input type="text" class="header-search__input" placeholder="Search..." autocomplete="off">
         <button class="btn-reset header-search__btn header-search__btn-search">
           <svg>
             <use xlink:href="img/sprite.svg#search"></use>
           </svg>
         </button>
-        <button class="btn-reset header-search__btn header-search__btn-clear">
+        <button class="btn-reset header-search__btn header-search__btn-clean">
           <svg>
-            <use xlink:href="img/sprite.svg#clear"></use>
+            <use xlink:href="img/sprite.svg#clean"></use>
           </svg>
         </button>
       </label>
@@ -36,24 +36,16 @@
 
     <main class="main">
       <section class="galery">
-  <div class="container galery__container">
-    <div class="galery__photo"></div>
-    <div class="galery__photo"></div>
-    <div class="galery__photo"></div>
-    <div class="galery__photo"></div>
-    <div class="galery__photo"></div>
-    <div class="galery__photo"></div>
-    <div class="galery__photo"></div>
-    <div class="galery__photo"></div>
-    <div class="galery__photo"></div>
-  </div>
+  <div class="container galery__container"></div>
 </section>
 
     </main>
     <footer class="footer">
   <div class="footer__container container flex">
     <a href="#" class="footer__logo">
-      <img src="img/logo.svg" alt="Логотип">
+      <svg>
+        <use xlink:href="img/sprite.svg#logo"></use>
+      </svg>
     </a>
     <span class="footer__copy">© 2023</span>
     <a href="https://github.com/Kleostro" target="_blank" class="footer__github-link">
