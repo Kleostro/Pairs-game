@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Pairs game</title>
+  <link type="image/x-icon" href="resources/favicon.ico" rel="shortcut icon">
+  <link rel="stylesheet" href="main.css">
+</head>
+<body>
+  <div class="bg"></div>
+  <div class="site-container">
+    <header class="header">
+  <div class="container header__container">
+    <a href="#" class="header__logo">
+      <svg>
+        <use xlink:href="img/sprite.svg#logo"></use>
+      </svg>
+    </a>
+    <h1 class="header__title">PAIRS GAME</h1>
+    <button class="btn-reset stat__btn">Results:</button>
+  </div>
+</header>
+
+    <main class="main">
+      <section class="game">
+  <div class="container game__container">
+    <div class="game__choice">
+      <h2 class="game__choice-title">Choose a location:</h2>
+      <div class="game__choice-btns-box">
+        <button class="btn-reset game__choice-btn">Dark forest</button>
+        <button class="btn-reset game__choice-btn">Dragon’s Lair</button>
+      </div>
+    </div>
+    <div class="game__settings visually-hidden">
+      <h2 class="game__settings-title">Difficulty Setting:</h2>
+      <strong class="game__settings-subtitle">Select the number of pairs of cards and game time:</strong>
+      <div class="game__settings-wrapper">
+        <div class="game__settings-difficulty-pairs">
+          <button class="btn-reset game__btn-difficulty">2</button>
+          <button class="btn-reset game__btn-difficulty">4</button>
+          <button class="btn-reset game__btn-difficulty">6</button>
+          <button class="btn-reset game__btn-difficulty">8</button>
+          <button class="btn-reset game__btn-difficulty">10</button>
+          <button class="btn-reset game__btn-difficulty">12</button>
+        </div>
+        <div class="game__settings-time">
+          <button class="btn-reset game__btn-time">01:00</button>
+          <button class="btn-reset game__btn-time">02:00</button>
+          <button class="btn-reset game__btn-time">03:00</button>
+          <button class="btn-reset game__btn-time">04:00</button>
+          <button class="btn-reset game__btn-time">05:00</button>
+          <button class="btn-reset game__btn-time">06:00</button>
+        </div>
+      </div>
+      <button class="btn-reset game__btn">Start the game</button>
+      <button class="btn-reset game__btn game__btn-menu">Menu</button>
+    </div>
+    <div class="game__time visually-hidden game__time--hidden">
+      <span class="game__subtitle">Location: Dark Forest</span>
+      <span class="game__timer"></span>
+      <div class="game__counters">
+        <span class="game__score">Score: 0</span>
+        <span class="game__steps">Moves: 0</span>
+      </div>
+    </div>
+    <div class="game__box visually-hidden"></div>
+    <div class="game__end visually-hidden">
+      <strong class="game__end-text game__end-text--hidden">You win!</strong>
+      <button class="btn-reset game__btn-repeat game__btn-repeat--hidden">Play again</button>
+      <button class="btn-reset game__btn game__btn-menu game__btn-menu-end game__btn-menu-end--hidden">Menu</button>
+    </div>
+  </div>
+</section>
+
+    </main>
+    <footer class="footer">
+  <div class="footer__container container flex">
+    <a href="#" class="footer__logo">
+      <svg>
+        <use xlink:href="img/sprite.svg#logo"></use>
+      </svg>
+    </a>
+    <span class="footer__copy">© 2023</span>
+    <a href="https://github.com/Kleostro" target="_blank" class="footer__github-link">
+      <svg xmlns="http://www.w3.org/2000/svg" xml:space="preserve" width="40" height="40" style="enable-background:new 0 0 24 24" viewBox="0 0 24 24">
+        <path d="M12 .296c-6.627 0-12 5.372-12 12 0 5.302 3.438 9.8 8.206 11.387.6.111.82-.26.82-.577 0-.286-.011-1.231-.016-2.234-3.338.726-4.043-1.416-4.043-1.416-.546-1.387-1.332-1.756-1.332-1.756-1.089-.745.082-.729.082-.729 1.205.085 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.108-.776.419-1.305.762-1.605-2.665-.303-5.467-1.332-5.467-5.93 0-1.31.469-2.381 1.237-3.221-.125-.303-.536-1.523.116-3.176 0 0 1.008-.322 3.301 1.23A11.509 11.509 0 0 1 12 6.099c1.02.005 2.047.138 3.006.404 2.29-1.553 3.297-1.23 3.297-1.23.653 1.653.242 2.873.118 3.176.769.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.814 1.103.814 2.222 0 1.606-.014 2.898-.014 3.293 0 .319.216.694.824.576 4.766-1.589 8.2-6.085 8.2-11.385C24 5.669 18.627.296 12 .296z" style="fill-rule:evenodd;clip-rule:evenodd"/>
+        <path d="M4.545 17.526c-.026.06-.12.078-.206.037-.087-.039-.136-.121-.108-.18.026-.061.12-.078.207-.037.087.038.137.12.107.18zM5.031 18.068c-.057.053-.169.028-.245-.055-.079-.084-.093-.196-.035-.249.059-.053.167-.028.246.056.079.083.094.194.034.248zM5.504 18.759c-.074.051-.194.003-.268-.103-.074-.107-.074-.235.002-.286.074-.051.193-.005.268.101.073.108.073.236-.002.288zM6.152 19.427c-.066.073-.206.053-.308-.046-.105-.097-.134-.234-.068-.307.067-.073.208-.052.311.046.104.097.135.235.065.307zM7.047 19.814c-.029.094-.164.137-.3.097-.136-.041-.225-.151-.197-.246.028-.095.164-.139.301-.096.135.04.224.15.196.245zM8.029 19.886c.003.099-.112.181-.255.183-.143.003-.26-.077-.261-.174 0-.1.113-.181.256-.184.143-.003.26.077.26.175zM8.943 19.731c.017.096-.082.196-.224.222-.139.026-.268-.034-.286-.13-.017-.099.084-.198.223-.224.141-.025.269.033.287.132z"/>
+      </svg>
+      kleostro
+    </a>
+    <a href="https://rs.school/js/" target="_blank" class="footer__rs-link">
+      <img src="img/rs_school_js.svg" alt="Logo rs-school">
+    </a>
+    <audio class="btn-sound" src="./resources/sounds/zvuk-vyibora-kategorii.mp3"></audio>
+    <audio class="game-sound" loop src="./resources/sounds/dream-Raid-Full-Version-(Mock-Up).mp3"></audio>
+    <audio class="true-sound" src="./resources/sounds/galochka-3.mp3"></audio>
+    <audio class="false-sound" src="./resources/sounds/7689335a082e02b.mp3"></audio>
+    <audio class="bg-sound" loop src="./resources/sounds/bg-sound.mp3"></audio>
+    <audio class="win-sound" src="./resources/sounds/zvuk-pobedy-fanfary.mp3"></audio>
+    <audio class="lost-sound" src="./resources/sounds/ty-proigral-game-lost.mp3"></audio>
+  </div>
+</footer>
+
+  </div>
+  <div class="modal modal--active loading-modal">
+  <div class="modal__overlay modal__overlay--active loading-overlay">
+    <div class="modal__content modal__content--active loading-content">
+      <div class="modal__loader modal__loader--active"></div>
+      <h2 class="modal__title">PAIRS GAME</h2>
+      <button class="btn-reset modal__btn">Welcome!</button>
+    </div>
+  </div>
+</div>
+
+  <div class="modal score-modal score">
+  <div class="modal__overlay score-overlay">
+    <div class="modal__content score-content">
+      <h2 class="score__title">Statistics of the last 10 games:</h2>
+        <table class="score__table">
+          <thead class="score__thead">
+            <tr class="score__thead-tr">
+              <td class="score__thead-td">№</td>
+              <td class="score__thead-td">Location</td>
+              <td class="score__thead-td">Number of pairs of cards</td>
+              <td class="score__thead-td">Game time</td>
+              <td class="score__thead-td">The rest of time</td>
+              <td class="score__thead-td">Win</td>
+              <td class="score__thead-td">Losing</td>
+              <td class="score__thead-td">Number of moves</td>
+              <td class="score__thead-td">Score</td>
+            </tr>
+          </thead>
+          <tbody class="score__tbody"></tbody>
+        </table>
+    </div>
+  </div>
+</div>
+
+  <script type="module" src="js/main.js"></script>
+</body>
+</html>
