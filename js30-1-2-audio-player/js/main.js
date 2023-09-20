@@ -38,8 +38,8 @@ let intervalID;
 
 const initialTrack = () => {
   audio.src = 'resources/audio/instasamka-who-i-am.mp3';
-  playerAuthor.textContent = 'instasamka';
-  playerTrackName.textContent = 'WHO I AM';
+  playerAuthor.textContent = 'INSTASAMKA';
+  playerTrackName.textContent = 'Who I Am';
   trackPoster.src = 'img/who-i-am-poster.webp';
   trackLength.textContent = '2:16';
 }
@@ -247,3 +247,13 @@ setInterval(() => {
 }, 500);
 
 initialTrack()
+
+alert('Дополнительный функционал описан в консоле')
+
+console.log(`
+ Дополнительный функционал:
+ 1. возможность выбрать трек на паузе без авто-запуска проигрывателя
+ 2. возможность перемешать плейлист
+ 3. возможность зациклить плейлист ВНИМАНИЕ!!! По ТЗ требуется проверить зацикливание плейлиста, в моей работе это регулируется по нажатию на соответствующую кнопку
+ 4. возможность зациклить трек
+`)
