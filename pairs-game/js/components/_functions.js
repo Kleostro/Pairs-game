@@ -1,6 +1,5 @@
-import { startGameForest } from "./_forestGame.js";
-import { startGameDragon } from "./_dragonGame.js";
-
+import { getCardsForestArr, getCardsDragonArr } from "./_sources.js";
+import { startGame } from "./_gameFrame.js";
 const endGame = document.querySelector('.game__end');
 const gameBox = document.querySelector('.game__box');
 
@@ -9,8 +8,43 @@ const gameRepeatBtn = document.querySelector('.game__btn-repeat');
 const gameMenuBtn = document.querySelector('.game__btn-menu-end');
 const timer = document.querySelector('.game__timer');
 const bgSound = document.querySelector('.bg-sound');
+const gameSound = document.querySelector('.game-sound');
+const btnSound = document.querySelector('.btn-sound');
 const winSound = document.querySelector('.win-sound');
 const lostSound = document.querySelector('.lost-sound');
+
+const soundSettingsBgBtn = document.querySelector('.game__sound-bg-btn');
+const soundSettingsGameBtn = document.querySelector('.game__sound-game-btn');
+
+bgSound.volume = 0.09;
+winSound.volume = 0.07;
+lostSound.volume = 0.07;
+
+export const playBgSound = () => {
+  if (localStorage.getItem('bg-sound') === 'true') {
+    soundSettingsBgBtn.style.backgroundImage = 'url(img/volume-off.svg)';
+    bgSound.pause()
+    localStorage.setItem('bg-sound', false)
+  } else {
+    soundSettingsBgBtn.style.backgroundImage = 'url(img/volume-on.svg)';
+    bgSound.currentTime = 0;
+    bgSound.volume = 0.09
+    bgSound.play()
+    localStorage.setItem('bg-sound', true)
+  }
+}
+
+export const playGameSound = () => {
+  if (localStorage.getItem('game-sound') === 'true') {
+    soundSettingsGameBtn.style.backgroundImage = 'url(img/volume-off.svg)';
+    gameSound.volume = 0
+    localStorage.setItem('game-sound', false)
+  } else {
+    soundSettingsGameBtn.style.backgroundImage = 'url(img/volume-on.svg)';
+    gameSound.volume = 0.09
+    localStorage.setItem('game-sound', true)
+  }
+}
 
 export const createPairedCardsArr = (count = 4, srcArr) => {
   let cardsArr = [];
@@ -43,30 +77,27 @@ export const createListItem = (className) => {
   return li;
 };
 
-const repeatGame = (count, time, imageBgSrc) => {
+const repeatGame = (gameName, count, time, imageBgSrc) => {
   timer.textContent = `Time left: 0${time - 1}:59`;
   gameBox.innerHTML = '';
   endGame.classList.add('visually-hidden');
-  if (imageBgSrc === 'url(img/card-bg-forest.jpg)') {
-    startGameForest(gameBox, count, time, imageBgSrc)
-  } else if (imageBgSrc === 'url(img/card-bg-dragon.jpg)') {
-    startGameDragon(gameBox, count, time, imageBgSrc)
-  }
+  let srcArr = null;
+  imageBgSrc === 'url(img/card-bg-forest.webp)' ? srcArr = getCardsForestArr() : srcArr = getCardsDragonArr()
+    startGame(gameName, srcArr, gameBox, count, time, imageBgSrc)
 };
 
-export const completeGame = (gameName, count, time, imageBgSrc, minutes, seconds) => {
+const completeGame = (gameName, count, time, imageBgSrc, minutes, seconds) => {
   gameBox.classList.remove('game__box--visible');
 
   setTimeout(() => {
     gameBox.classList.add('visually-hidden');
     gameBox.innerHTML = '';
   }, 400);
-  let sound = document.querySelector('.game-sound');
-  sound.currentTime = 0;
-  sound.pause()
+  gameSound.currentTime = 0;
+  gameSound.pause()
   winSound.play()
   setTimeout(() => {
-    bgSound.play()
+    if (localStorage.getItem('bg-sound') === 'true') bgSound.play()
   }, 2500);
 
   const win = true;
@@ -98,31 +129,29 @@ export const completeGame = (gameName, count, time, imageBgSrc, minutes, seconds
     gameText.classList.add('game__end-text--hidden');
     gameRepeatBtn.classList.add('game__btn-repeat--hidden');
     gameMenuBtn.classList.add('game__btn-menu-end--hidden');
-    let sound = document.querySelector('.btn-sound');
-    sound.play();
-    sound.currentTime = 0;
-    bgSound.pause()
+    btnSound.play();
+    btnSound.currentTime = 0;
+    if (localStorage.getItem('bg-sound') === 'true') bgSound.play()
     setTimeout(() => {
-      repeatGame(count, time, imageBgSrc)
+      repeatGame(gameName, count, time, imageBgSrc)
     }, 500);
   }
 };
 
-export const lostGame = (gameName, count, time, imageBgSrc) => {
+const lostGame = (gameName, count, time, imageBgSrc) => {
   gameBox.classList.remove('game__box--visible');
 
   setTimeout(() => {
     gameBox.classList.add('visually-hidden');
     gameBox.innerHTML = '';
   }, 400);
-  let sound = document.querySelector('.game-sound');
-  sound.currentTime = 0;
-  sound.pause()
+  gameSound.currentTime = 0;
+  gameSound.pause()
 
   lostSound.play()
 
   setTimeout(() => {
-    bgSound.play()
+    if (localStorage.getItem('bg-sound') === 'true') bgSound.play()
   }, 3000);
 
   const win = false;
@@ -158,11 +187,10 @@ export const lostGame = (gameName, count, time, imageBgSrc) => {
     gameText.classList.add('game__end-text--hidden');
     gameRepeatBtn.classList.add('game__btn-repeat--hidden');
     gameMenuBtn.classList.add('game__btn-menu-end--hidden');
-    let sound = document.querySelector('.btn-sound');
-    sound.play();
-    bgSound.pause()
+    btnSound.play();
+    playBgSound()
     setTimeout(() => {
-      repeatGame(count, time, imageBgSrc)
+      repeatGame(gameName, count, time, imageBgSrc)
     }, 500);
   }
 };
@@ -206,8 +234,7 @@ function Info(location, win, lost, countPairs, time, minutes, seconds, steps, sc
     this.score = Number(score)
 }
 
-
-export function addInfoGame() {
+function addInfoGame() {
   const tBody = document.querySelector('.score__tbody');
 
   let infoArr = JSON.parse(localStorage.getItem('info')) || [];
@@ -274,3 +301,35 @@ export function addInfoGame() {
     }
   }
 }
+
+export const loading = () => {
+  addInfoGame()
+  localStorage.setItem('bg-sound', false)
+  localStorage.setItem('game-sound', true)
+
+  const loadingModal = document.querySelector('.loading-modal');
+  const loadingModalOverlay = document.querySelector('.loading-overlay');
+  const loadingModalContent = document.querySelector('.loading-content');
+  const modalBtn = document.querySelector('.modal__btn');
+  const modalLoader = document.querySelector('.modal__loader');
+  const modalTitle = document.querySelector('.modal__title');
+
+  setTimeout(() => {
+    modalBtn.classList.add('modal__btn--active');
+    modalLoader.classList.remove('modal__loader--active');
+    modalTitle.classList.add('modal__title--active');
+
+    modalBtn.onclick = () => {
+      playBgSound()
+      modalTitle.classList.add('visually-hidden');
+      modalTitle.classList.remove('modal__title--active');
+      modalBtn.classList.remove('modal__btn--active');
+      setTimeout(() => {
+        loadingModal.classList.remove('modal--active');
+        loadingModalOverlay.classList.remove('modal__overlay--active');
+        loadingModalContent.classList.remove('modal__content--active');
+      }, 600);
+    }
+  }, 3000);
+}
+
