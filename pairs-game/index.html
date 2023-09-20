@@ -19,23 +19,39 @@
       </svg>
     </a>
     <h1 class="header__title">PAIRS GAME</h1>
-    <button class="btn-reset stat__btn">Results:</button>
+    <button class="btn-reset stat__btn">Results</button>
   </div>
 </header>
 
     <main class="main">
       <section class="game">
   <div class="container game__container">
+    <div class="game__sound-settings">
+      <button class="btn-reset game__sound-settings-btn">
+        Settings
+        <svg>
+          <use xlink:href="img/sprite.svg#arrow-settings"></use>
+        </svg>
+      </button>
+      <ul class="list-reset game__sound-settings-list game__sound-settings-list--hidden">
+        <li class="game__sound-settings-item">
+          <button class="btn-reset game__sound-bg-btn">Background sound</button>
+        </li>
+        <li class="game__sound-settings-item">
+          <button class="btn-reset game__sound-game-btn">Game sound</button>
+        </li>
+      </ul>
+    </div>
     <div class="game__choice">
-      <h2 class="game__choice-title">Choose a location:</h2>
+      <h2 class="game__choice-title">Choose a location</h2>
       <div class="game__choice-btns-box">
         <button class="btn-reset game__choice-btn">Dark forest</button>
         <button class="btn-reset game__choice-btn">Dragon’s Lair</button>
       </div>
     </div>
     <div class="game__settings visually-hidden">
-      <h2 class="game__settings-title">Difficulty Setting:</h2>
-      <strong class="game__settings-subtitle">Select the number of pairs of cards and game time:</strong>
+      <h2 class="game__settings-title">Difficulty Setting</h2>
+      <strong class="game__settings-subtitle">Select the number of pairs of cards and game time</strong>
       <div class="game__settings-wrapper">
         <div class="game__settings-difficulty-pairs">
           <button class="btn-reset game__btn-difficulty">2</button>
