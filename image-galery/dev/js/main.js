@@ -3,7 +3,7 @@ const searchInp = document.querySelector('.header-search__input');
 const searchBtn = document.querySelector('.header-search__btn-search');
 const cleanBtn = document.querySelector('.header-search__btn-clean');
 
-let url = `https://api.unsplash.com/photos/random?count=30&client_id=SouHY7Uul-OxoMl3LL3c0NkxUtjIrKwf3tsGk1JaiVo`;
+let url = `https://api.unsplash.com/photos/random?count=30&client_id=or0oG32zRnb7HAhV-Fkff1WomO_bb5XQYSqlzNLVMaU`;
 
 async function getData(url) {
   const res = await fetch(url)
@@ -42,7 +42,7 @@ const showData = (data) => {
 
 searchBtn.addEventListener('click', () => {
   galeryContainer.innerHTML = '';
-  url = `https://api.unsplash.com/photos/random?query=${searchInp.value}&count=30&client_id=SouHY7Uul-OxoMl3LL3c0NkxUtjIrKwf3tsGk1JaiVo`;
+  url = `https://api.unsplash.com/photos/random?query=${searchInp.value}&count=30&client_id=or0oG32zRnb7HAhV-Fkff1WomO_bb5XQYSqlzNLVMaU`;
   getData(url);
 });
 
@@ -52,7 +52,7 @@ cleanBtn.addEventListener('click', () => {
 
 searchInp.addEventListener('keydown', (e) => {
   if (e.key === 'Enter' && searchInp.value !== '') {
-    url = `https://api.unsplash.com/photos/random?query=${searchInp.value}&count=30&client_id=SouHY7Uul-OxoMl3LL3c0NkxUtjIrKwf3tsGk1JaiVo`;
+    url = `https://api.unsplash.com/photos/random?query=${searchInp.value}&count=30&client_id=or0oG32zRnb7HAhV-Fkff1WomO_bb5XQYSqlzNLVMaU`;
     getData(url);
   } else if (e.key === 'Escape') searchInp.value = '';
 });
